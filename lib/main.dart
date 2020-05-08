@@ -52,7 +52,6 @@ class _PianoQuizPageState extends State<PianoQuizPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Learn Piano Notes'),
