@@ -6,6 +6,9 @@ enum Note {
   A, B, C, D, E, F, G
 }
 
+// Converts enum Note.A to string "A"
+// @Param Note to convert Note.A
+// @Return String in format "A"
 String NoteEnumToString(Note note) {
   return note.toString().substring(5, 6);
 }
@@ -19,10 +22,11 @@ class PianoData {
       pitch: "${NoteEnumToString(noteAnswer)}4",
       scale: "C",
     );
-    buttons = _generateButtons();
   }
 
+  // Generates the next question in the quiz
   void GenerateNextQuizQuestion(bool isTrebleClef) {
+    // User answer is set to A as default due to radio buttons
     userAnswer = Note.A;
     noteAnswer = _generateNoteAnswer();
     int pitch;
@@ -32,23 +36,6 @@ class PianoData {
       pitch: "${NoteEnumToString(noteAnswer)}${pitch}",
       scale: "C",
     );
-    buttons = _generateButtons();
-  }
-
-  List<RadioListTile<Note>> _generateButtons() {
-    List<RadioListTile<Note>> radioButtons = [];
-    _notes.forEach((note) {
-      radioButtons.add(RadioListTile(
-        title: Text(NoteEnumToString(note)),
-        onChanged: (Note value) {
-          userAnswer = value;
-        },
-        value: note,
-        groupValue: userAnswer,
-      ));
-    });
-    radioButtons.shuffle();
-    return radioButtons;
   }
 
   // Picks a random note from a list as an answer
@@ -57,7 +44,6 @@ class PianoData {
   }
 
   SheetMusic sheet;
-  List<RadioListTile> buttons = [];
   Note noteAnswer;
   Note userAnswer;
   static const List<Note> _notes = [Note.A, Note.B, Note.C, Note.D, Note.E, Note.F, Note.G];
